@@ -1,48 +1,45 @@
 class Solution {
     public int findMinArrowShots(int[][] points) {
-        
-        
-        
-        
-        
-        
-        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->{
-           
-                            if(a[0] == b[0]){
-                            return Integer.compare(a[1] , b[1]) ;
-                              
-                            }
-                       return Integer.compare(a[0],b[0]);    });
-        
-        
+//         int n = points.length ;
+//         Arrays.sort(points,(a,b)->{
+//             return a[1] == b[1] ? a[1] - b[1] : a[0] - b[0] ;
+//         } );
+       
+//         int ans = 0 ; int ei = 0 ;
+//         for(int i = 0 ; i < n ; i++){
+//             int a1[] = points[i] ;
             
-            for(int[] i  : points ){
-            pq.add(i) ;
-        }
-        
-        if(pq.size() == 1) return 1 ;
-        int c = points[0].length ;
-        int ans = 1 ;
-        int count = 0 ;
-        
-        while(pq.size()!= 1){
-            int a1[] = pq.remove() ;
-            int a2[] = pq.remove() ;
+//             if(ei == 0){
+//             ei = a1[1] ;
+//             ans++ ;    
+//             }else{
+//                 if( a1[0] >= ei){
+//                     ans++ ;
+//                     ei = a1[1] ;
+//                 }
+//             }
             
-            if(a1[1] >= a2[0]){
-                int x = Math.max(a1[0] , a2[0]) ;
-                int y = Math.min(a1[1] , a2[1]) ;
-                pq.add(new int[]{x,y}) ;
-                c-- ;
+            
+//         }
+            
+//          return ans ;   
+        
+        Arrays.sort(points , (a,b)->Integer.compare(a[1] , b[1]));
+        
+        int arrow = 1 ;
+        int reach = points[0][1] ;
+        
+        
+        for(int i = 1 ; i < points.length ; i++){
+            if(points[i][0] > reach){
+                arrow++ ;
+                reach = points[i][1] ;
+                
             }else{
-                ans ++ ;
-                pq.add(a2) ;
                 
             }
-            
-            
         }
         
-        return ans ;
+        return arrow ;
     }
 }
