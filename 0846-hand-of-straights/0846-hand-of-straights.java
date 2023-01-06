@@ -1,5 +1,5 @@
 class Solution {
-    public boolean isNStraightHand(int[] hand, int w) {
+    public boolean isNStraightHand1(int[] hand, int w) {
         
         if(hand.length % w != 0) return false ;
         
@@ -30,4 +30,23 @@ class Solution {
         
         return true ;
     }
+    
+     public boolean isNStraightHand(int[] hand, int w) {
+    
+    PriorityQueue<Integer> pq = new PriorityQueue<>();
+    
+        for(int e : hand){
+            pq.add(e) ;
+        }
+    
+    while(pq.size() > 0){
+        int min = pq.peek();
+        for(int i = min ; i < min + w ; i++){
+            if(!pq.remove(i)) return false ;
+        }
+    }
+    
+    return true ;
+    
+     } 
 }
